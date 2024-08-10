@@ -1,0 +1,37 @@
+.modal {
+  &__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    &-card {
+      background-color: rgb(241, 240, 240);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      max-width: 80%;
+      width: 80%;
+      height: 30%;
+      position: relative;
+      &-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+    }
+    // Create css to hide the modal with animation when it is closed
+    &-hide {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+  }
+}
