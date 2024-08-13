@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { CurrentUserContextType } from '../../interfaces/Interfaces';
+import { Author, CurrentUserContextType } from '../../interfaces/Interfaces';
 
 
 
 
 const AppContext = React.createContext<CurrentUserContextType>({} as CurrentUserContextType);
 
-const AppContextProvider = ({children}: {children: React.ReactNode}) => {
+const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const example = 'example telemeter';
 
   const verifyData = (data: string) => {
@@ -15,11 +15,18 @@ const AppContextProvider = ({children}: {children: React.ReactNode}) => {
 
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const currentUserContextType: CurrentUserContextType = { example, verifyData, openModal, setOpenModal: setOpenModal };
+  const [authors, setAuthors] = useState<Author[]>([]);
+
+  const [language, setLanguage] = useState("en");
+
+  const currentUserContextType: CurrentUserContextType = {
+    example, verifyData, openModal, setOpenModal, authors, setAuthors,
+    language, setLanguage
+  };
   return (
-  <AppContext.Provider value={currentUserContextType}>
-    {children}
-  </AppContext.Provider>
+    <AppContext.Provider value={currentUserContextType}>
+      {children}
+    </AppContext.Provider>
   );
 
 }

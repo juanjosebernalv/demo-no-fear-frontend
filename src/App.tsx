@@ -22,7 +22,7 @@ function App() {
         <Col span={18}>
           <div
             id="part-1"
-             className="pages__container pages__part-one"
+            className="pages__container pages__part-one"
           >
             <LoginForm />
           </div>

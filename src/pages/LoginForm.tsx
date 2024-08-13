@@ -1,8 +1,15 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useInput } from '../hooks/useInput';
 import { AppContext } from '../components/AppContext/AppContext';
-import { Card } from 'antd';
+import { Card, Spin } from 'antd';
 const LoginForm = () => {
+
+  const contentStyle: React.CSSProperties = {
+    padding: 50,
+    background: 'rgba(0, 0, 0, 0.05)',
+    borderRadius: 4,
+  };
+  const content = <div style={contentStyle} />;
 
   const email = useInput('');
   const password = useInput('');
@@ -30,12 +37,12 @@ const LoginForm = () => {
       },
       // .,.
     })
-      // .then(response => response.json())
-      // .then(data => console.log(data));
-      const blob = await result.blob();
-      const image = URL.createObjectURL(blob);
+    // .then(response => response.json())
+    // .then(data => console.log(data));
+    const blob = await result.blob();
+    const image = URL.createObjectURL(blob);
 
-      setImageHeader(image);
+    setImageHeader(image);
   }
 
   useEffect(() => {
@@ -46,26 +53,29 @@ const LoginForm = () => {
     <AppContext.Consumer>
 
       {
-        ({example, verifyData}: { example: string, verifyData: Function }) => (
+        ({ example, verifyData }: { example: string, verifyData: Function }) => (
           <Card hoverable
             className=""
-            cover={<img alt="example" className="w-full h-96" src={imageHeader} />}>
+            cover={imageHeader ? (<img alt="example" className="w-full h-96" src={imageHeader} />)
+              : (<Spin tip="Loading" size="large">
+                {content}
+              </Spin>)}>
             {/* { imageHeader ?<img src={imageHeader} alt="Guido Van Rossum"  /> : 'loading...' } */}
-          <form onSubmit={handleSubmit}>
-            -----{example}
-            <label>
-              Email:
-              <input type="email" {...email} />
-            </label>
-            <br />
-            <label>
-              Password:
-              <input type="password" {...password} />
-            </label>
-            <br />
-            <button type="submit" >Submit</button>
+            <form onSubmit={handleSubmit}>
+              -----{example}
+              <label>
+                Email:
+                <input type="email" {...email} />
+              </label>
+              <br />
+              <label>
+                Password:
+                <input type="password" {...password} />
+              </label>
+              <br />
+              <button type="submit" >Submit</button>
 
-          </form>
+            </form>
           </Card>
 
         )
